@@ -85,11 +85,10 @@ jobs:
         run: bundle exec rspec
       
       - name: Publish code coverage
-        env: 
-          SECRET_CC_TOKEN: ${{ secrets.CC_TEST_REPORTER_I }}
-        run: |
-          export GIT_BRANCH="${GITHUB_REF#refs/heads/}"
-          ./cc-test-reporter after-build -t "sinplecov" -r "$SECRET_CC_TOKEN"
+        uses: paambaati/codeclimate-action@v2.7.5        
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_I }}
+
 
 
 
