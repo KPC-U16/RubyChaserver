@@ -85,6 +85,9 @@ jobs:
         run: bundle exec rspec
       
       - name: Directory Make
+        run: mkdir coverage
+        
+      - name: Touch File
         run: touch coverage/.last_run.json
       
       - name: Simplecov Report
