@@ -19,7 +19,4 @@ class ServerController < ApplicationController
 
   end
 
-  def clientRequest
-    
-  end
 end

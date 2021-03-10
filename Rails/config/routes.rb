@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   #chaser server actions
   post "clientHello" => "server#clientHello" #Chaserクライアント接続処理 body(roomToken,name,CorH) return(battleToken)
-  post "clientRequest" => "server#clientRequest" #Chaserクライアント行動処理 body(battleToken,cmd) return(values)
 
   
   #token manage server actions
