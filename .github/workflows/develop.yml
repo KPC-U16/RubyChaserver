@@ -89,7 +89,7 @@ jobs:
           SECRET_CC_TOKEN: ${{ secrets.CC_TEST_REPORTER_I }}
         run: |
           export GIT_BRANCH="${GITHUB_REF#refs/heads/}"
-          ./cc-test-reporter after-build -r "$SECRET_CC_TOKEN"
+          ./cc-test-reporter after-build -t sinplecov -r "$SECRET_CC_TOKEN"
 
 
 
