@@ -83,7 +83,10 @@ jobs:
       
       - name: Run rspec
         run: bundle exec rspec
-        
+      
+      - name: Directory Make
+        run: touch coverage/.last_run.json
+      
       - name: Simplecov Report
         uses: devmasx/coverage-check-action@v1.2.0
         with:
