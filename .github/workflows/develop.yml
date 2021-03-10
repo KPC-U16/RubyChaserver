@@ -1,40 +1,40 @@
 name: Docker
-on:
-  pullrequest:
-    branches:
+on: 
+  pullrequest: 
+    branches: 
       - develop
 
-jobs:
-  build:
+jobs: 
+  build: 
     runs-on: ubuntu-latest
 
-    service:
-      postgres:
+    service: 
+      postgres: 
         image: postgres:13.2
         ports: ["5432:5432"]
         option: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        env:
+        env: 
           POSTGRES_HOST_AUTH_METHOD: 'trust'
       
-      redis:
+      redis: 
         image: redis:6.2.1
         options: --health-cmd "redis-cli -h localhost ping" --health-interval 10s --health-timeout 5s --health-retries 15
       
-    container:
+    container: 
       image: ruby:3.0.0
-      env:
+      env: 
         RAILS_ENV: test
         DATABASE_HOST: postgres
         REDIS_URL: redis://redis:6379/1
     
-    steps:
+    steps: 
       - uses: actions/checkout@v2
       
       - name: Cache node modules
         uses: actions/cache@v2
-        env:
+        env: 
           cache-name: cache-node-modules
-        with:
+        with: 
           # npm キャッシュファイルは Linux/macOS の「~/.npm」に保存される
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
@@ -45,7 +45,7 @@ jobs:
       
       - name: Cache bundle gems
         uses: actions/cache@v2
-        with:
+        with: 
           path: vendor/bundle
           key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
@@ -83,11 +83,11 @@ jobs:
       
       - name: Run rspec
         run: bundle exec rspec
-
-    - name: Publish code coverage
-      run: |
-        export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-        ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_I}}
+      
+      - name: Publish code coverage
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_I}}
 
 
 
