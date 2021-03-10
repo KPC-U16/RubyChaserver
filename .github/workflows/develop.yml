@@ -1,0 +1,93 @@
+name: Docker
+on:
+  pullrequest:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    service:
+      postgres:
+        image: postgres:13.2
+        ports: ["5432:5432"]
+        option: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        env:
+          POSTGRES_HOST_AUTH_METHOD: 'trust'
+      
+      redis:
+        image: redis:6.2.1
+        options: --health-cmd "redis-cli -h localhost ping" --health-interval 10s --health-timeout 5s --health-retries 15
+      
+    container:
+      image: ruby:3.0.0
+      env:
+        RAILS_ENV: test
+        DATABASE_HOST: postgres
+        REDIS_URL: redis://redis:6379/1
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm キャッシュファイルは Linux/macOS の「~/.npm」に保存される
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-    
+      
+      - name: Cache bundle gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-${{ env.cache-name }}-
+            ${{ runner.os }}-gem-
+            ${{ runner.os }}-
+      
+      - name: Install Node.js and Yarn
+        run: |
+          # https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions
+          curl -sL https://deb.nodesource.com/setup_12.x | bash -
+          apt-get install -y nodejs
+          # https://classic.yarnpkg.com/en/docs/install#debian-stable
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+          apt update && apt install yarn
+
+      - name: Setup Code Climate test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      
+      - name: Install Bundler
+        run: gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+      
+      - name: Bundle install
+        run: bundle install --path=vendor/bundle --jobs 4 --retry 3
+      
+      - name: Yarn install
+        run: bundle exec rails yarn:install
+      
+      - name: DB setup
+        run: bundle exec rails db:setup
+      
+      - name: Run rspec
+        run: bundle exec rspec
+
+    - name: Publish code coverage
+      run: |
+        export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+        ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_I}}
+
+
+
