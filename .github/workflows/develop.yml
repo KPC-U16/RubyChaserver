@@ -83,7 +83,12 @@ jobs:
       
       - name: Run rspec
         run: bundle exec rspec
-      
+        
+      - name: Simplecov Report
+        uses: aki77/simplecov-report-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5        
         env:
