@@ -1,9 +1,11 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative "../config/environment"
 require "rails/test_help"
 
-require 'simplecov'
-SimpleCov.start 'rails'
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
