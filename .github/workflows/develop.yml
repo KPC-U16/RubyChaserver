@@ -101,7 +101,7 @@ jobs:
         run: ls -al 
 
       - name: ls coverage
-        run: ls-al ./coverage
+        run: ls -al ./coverage
 
       - name: Publish code coverage
         env: 
