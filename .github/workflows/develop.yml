@@ -109,6 +109,11 @@ jobs:
           path: coverage
         if: always()
 
+      - name: ENV check
+        run: echo ${TEST}
+        env: 
+          TEST: ${secrets.READ_CHECK}
+
       - name: Publish code coverage
         run: |
           export GIT_BRANCH=${GITHUB_REF#refs/heads/}
