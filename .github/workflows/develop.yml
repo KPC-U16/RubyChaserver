@@ -84,6 +84,8 @@ jobs:
       - name: Run rspec
         run: bundle exec rspec
         
+        run: ls -al ./coverage
+        
       - name: Publish code coverage
         env: 
           CC_TEST_TOKEN: ${{secrets.CC_TEST_REPORTER_ID}}
