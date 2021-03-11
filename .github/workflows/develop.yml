@@ -86,7 +86,10 @@ jobs:
       
       - name: ls
         run: ls -al 
-        
+
+      - name: cat 
+        run: cat cc-test-reporter    
+
       - name: Publish code coverage
         env: 
           CC_TEST_TOKEN: ${{secrets.CC_TEST_REPORTER_ID}}
