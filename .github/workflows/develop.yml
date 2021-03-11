@@ -112,7 +112,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # 以下はデフォルト設定
           # resultPath: coverage/.last_run.json
-          # failedThreshold: 90
+          failedThreshold: 0
 
       # テストカバレッジの詳細を確認したい時の為
       - name: Archive coverage artifacts
