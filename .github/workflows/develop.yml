@@ -112,7 +112,7 @@ jobs:
       - name: ENV check
         run: echo ${TEST}
         env: 
-          TEST: ${secrets.READ_CHECK}
+          TEST: ${{secrets.READ_CHECK}}
 
       - name: Publish code coverage
         run: |
