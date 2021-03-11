@@ -110,10 +110,10 @@ jobs:
         if: always()
 
       - name: ENV check
+        run: echo ${TEST}
         env: 
           TEST: ${{ secrets.READ_CHECK }}
           NOUSE: "HOGE"
-        run: echo ${TEST}
 
       - name: Publish code coverage
         run: |
