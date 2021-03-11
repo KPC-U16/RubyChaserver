@@ -100,8 +100,14 @@ jobs:
       - name: ls
         run: ls -al 
 
-      - name: ls coverage
-        run: ls -al ./coverage
+      - name: cat json
+        run: cat ./coverage/.resultset.json
+
+      - name: cat json
+        run: ./coverage/.last_run.json
+
+      - name: cat html
+        run: cat ./coverage/index.html
 
       - name: Publish code coverage
         env: 
