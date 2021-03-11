@@ -109,10 +109,16 @@ jobs:
           path: coverage
         if: always()
 
+      #ENVがちゃんと取れてるか確認したい
       - name: ENV check
-        run: echo ${TEST}
         env: 
+          #ENV側取れてなさそう
           TEST: ${{ secrets.READ_CHECK }}
+          
+          #取れてたらログで*****になるはず
+          REPOSI: ${{ REPOENV}}
+          
+          #直書きは取れる
           NOUSE: "HOGE"
 
       - name: Publish code coverage
