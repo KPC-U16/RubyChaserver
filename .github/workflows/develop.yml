@@ -115,4 +115,4 @@ jobs:
           ./cc-test-reporter after-build --coverage-input-type "simplecov" --id "${CC_TEST_REPORTER_ID}"
         
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_I }}
