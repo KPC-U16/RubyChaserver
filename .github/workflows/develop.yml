@@ -80,6 +80,12 @@ jobs:
       
       - name: DB setup
         run: bundle exec rails db:setup
+
+      - name: Rspec init
+        run: rails g rspec:install
+      
+      - name: P.S. config ruby  file
+        run: sed -i "1irequire 'simplecov'\nSimpleCov.start 'rails'" rspec/rails_helper.rb
       
       - name: Run rspec
         run: bundle exec rspec
