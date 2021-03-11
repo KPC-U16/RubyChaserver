@@ -97,6 +97,8 @@ jobs:
           # 以下はデフォルト設定
           # resultPath: coverage/.last_run.json
           # failedThreshold: 90
+          #デバック中のため0へ
+          failedThreshold: 0
 
 
       # テストカバレッジの詳細を確認したい時の為
@@ -110,7 +112,7 @@ jobs:
       - name: Publish code coverage
         run: |
           export GIT_BRANCH=${GITHUB_REF#refs/heads/}
-          ./cc-test-reporter after-build --coverage-input-type "simplecov" -r ${CC_TEST_TOKEN}
+          ./cc-test-reporter after-build --coverage-input-type "simplecov" -r "${CC_TEST_TOKEN}"
         
         env:
           CC_TEST_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
