@@ -112,7 +112,7 @@ jobs:
       - name: Publish code coverage
         run: |
           export GIT_BRANCH=${GITHUB_REF#refs/heads/}
-          ./cc-test-reporter after-build --coverage-input-type "simplecov" -r "${CC_TEST_TOKEN}"
+          ./cc-test-reporter after-build --coverage-input-type "simplecov" -r "${CC_TEST_REPORTER_ID}"
         
         env:
-          CC_TEST_TOKEN: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
