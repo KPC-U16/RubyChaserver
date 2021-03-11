@@ -10,7 +10,7 @@ gem 'rexml'
 
 gem 'rspec-rails'
 
-gem 'simplecov', '~> 0.20.0' 
+gem 'simplecov', '~> 0.17.1' 
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
