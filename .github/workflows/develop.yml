@@ -84,7 +84,7 @@ jobs:
       - name: Run rspec
         run: bundle exec rspec
       
-      -name: ls
+      - name: ls
         run: ls -al ./coverage
         
       - name: Publish code coverage
