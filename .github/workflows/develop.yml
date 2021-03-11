@@ -112,6 +112,7 @@ jobs:
       - name: ENV check
         env: 
           TEST: ${{ secrets.READ_CHECK }}
+          NOUSE: "HOGE"
         run: echo ${TEST}
 
       - name: Publish code coverage
