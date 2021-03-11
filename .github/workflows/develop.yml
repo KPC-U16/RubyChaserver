@@ -103,9 +103,6 @@ jobs:
       - name: cat json
         run: cat ./coverage/.resultset.json
 
-      - name: cat json
-        run: ./coverage/.last_run.json
-
       - name: cat html
         run: cat ./coverage/index.html
 
