@@ -111,6 +111,7 @@ jobs:
 
       #ENVがちゃんと取れてるか確認したい
       - name: ENV check
+      run: echo "仮おき"
         env: 
           #ENV側取れてなさそう
           TEST: ${{ secrets.READ_CHECK }}
