@@ -81,20 +81,24 @@ jobs:
       - name: DB setup
         run: bundle exec rails db:setup
 
+      - name: ls
+        run: ls -al 
+
       - name: Rspec init
         run: bundle exec rails g rspec:install
       
+      - name: ls
+        run: ls -al 
+
+
       - name: P.S. config ruby  file
-        run: sed -i "1irequire 'simplecov'\nSimpleCov.start 'rails'" rspec/rails_helper.rb
+        run: sed -i "1irequire 'simplecov'\nSimpleCov.start 'rails'" spec/spec_helper.rb
       
       - name: Run rspec
         run: bundle exec rspec
       
       - name: ls
         run: ls -al 
-
-      - name: cat 
-        run: cat cc-test-reporter    
 
       - name: Publish code coverage
         env: 
