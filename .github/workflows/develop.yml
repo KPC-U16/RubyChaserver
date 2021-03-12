@@ -117,7 +117,7 @@ jobs:
           TEST: ${{ secrets.READ_CHECK }}
           
           #取れてたらログで*****になるはず
-          REPOSI: ${{ secrets.REPOENV }}
+          REPOSI: ${{ secrets.REPO }}
           
           #直書きは取れる
           NOUSE: "HOGE"
