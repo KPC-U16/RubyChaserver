@@ -98,7 +98,7 @@ jobs:
           # resultPath: coverage/.last_run.json
           # failedThreshold: 90
           #デバック中のため0へ
-          failedThreshold: 0
+          #failedThreshold: 0
 
 
       # テストカバレッジの詳細を確認したい時の為
