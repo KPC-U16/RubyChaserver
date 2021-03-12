@@ -90,6 +90,16 @@ jobs:
       - name: Run rspec
         run: bundle exec rspec
 
+
+      #Code Climateへレポートを送信
+      - name: Publish code coverage
+        run: |
+          export GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          ./cc-test-reporter after-build --coverage-input-type "simplecov" --id ${CC_TEST_REPORTER_ID}
+        
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
       - name: Simplecov Report
         uses: aki77/simplecov-report-action@v1
         with:
@@ -108,12 +118,3 @@ jobs:
           name: coverage
           path: coverage
         if: always()
-
-      #Code Climateへレポートを送信
-      - name: Publish code coverage
-        run: |
-          export GIT_BRANCH=${GITHUB_REF#refs/heads/}
-          ./cc-test-reporter after-build --coverage-input-type "simplecov" --id ${CC_TEST_REPORTER_ID}
-        
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
