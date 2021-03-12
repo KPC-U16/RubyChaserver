@@ -28,8 +28,6 @@ jobs:
         REDIS_URL: redis://redis:6379/1
     
     steps: 
-      - env:
-          CC_TEST_REPORTER_ID: "${{ secrets.CC_TEST_REPORTER_I }}"
       - uses: actions/checkout@v2
       
       - name: Cache node modules
@@ -128,3 +126,6 @@ jobs:
         run: |
           export GIT_BRANCH=${GITHUB_REF#refs/heads/}
           ./cc-test-reporter after-build --coverage-input-type "simplecov" --id ${CC_TEST_REPORTER_ID}
+        
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_I }}
