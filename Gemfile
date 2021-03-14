@@ -10,6 +10,7 @@ gem 'rexml'
 
 gem 'rspec-rails'
 
+#最新バージョンだとcc-test-reporterがエラーを吐くので暫定対応
 gem 'simplecov', '~> 0.17.1'
 #gem 'simplecov' 
 
