@@ -5,6 +5,15 @@ ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
+
+gem 'rexml'
+
+gem 'rspec-rails'
+
+#最新バージョンだとcc-test-reporterがエラーを吐くので暫定対応
+gem 'simplecov', '~> 0.17.1'
+#gem 'simplecov' 
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
