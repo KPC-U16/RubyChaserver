@@ -79,16 +79,10 @@ jobs:
         run: bundle exec rails yarn:install
       
       - name: DB setup
-        run: bundle exec rails db:setup
-
-      - name: Rspec init
-        run: bundle exec rails g rspec:install
-
-      - name: P.S. config ruby  file
-        run: sed -i "1irequire 'simplecov'\nSimpleCov.start 'rails'" spec/spec_helper.rb
+        run: bundle exec rails db:migrate
       
       - name: Run rspec
-        run: bundle exec rails t
+        run: bundle exec rspec
 
 
       #Code Climateへレポートを送信
@@ -108,7 +102,7 @@ jobs:
           # resultPath: coverage/.last_run.json
           # failedThreshold: 90
           #デバック中のため0へ
-          #failedThreshold: 0
+          failedThreshold: 0
 
 
       # テストカバレッジの詳細を確認したい時の為
