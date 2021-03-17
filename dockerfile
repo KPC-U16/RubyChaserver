@@ -30,11 +30,12 @@ USER rails
 WORKDIR $WORKSPACE
 
 # bundle install.
-
 COPY --chown=rails:rails Rails/ ${WORKSPACE}/
 RUN bundle install && \
     bundle update
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
+
+RUN yarn install
 
 EXPOSE  3000
 CMD ["rails", "s", "-b", "0.0.0.0"]
