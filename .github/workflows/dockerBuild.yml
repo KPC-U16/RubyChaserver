@@ -9,6 +9,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    
+    - name: ls
+      run: ls -al 
+
+    #- name: Create DIR
+    #  run: mkdir Rails
+    
+    #- name: mv file
+    #  run: mv * Rails/
+    
+    #- name: CP file
+    #  run: |
+    #    cp dockerfile
+    
     - name: build Dockerfile and push image # userで外部ファイル or 定義済みの処理を実行できる。ここではリポジトリのcheckout
       run: |
       
