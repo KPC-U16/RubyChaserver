@@ -3,6 +3,12 @@ FROM ruby:3.0.0
 ENV LANG C.UTF-8
 ENV WORKSPACE=/usr/local/src
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update && apt install yarn
+
 # install bundler.
 RUN apt-get update && \
     apt-get install -y vim less && \
@@ -31,4 +37,4 @@ RUN bundle install && \
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
 EXPOSE  3000
-CMD ["rails", "s", "-b", "0.0.0.0"]
+CMD ["rails", "start", "-b", "0.0.0.0"]
