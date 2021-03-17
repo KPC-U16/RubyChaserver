@@ -25,7 +25,7 @@ WORKDIR $WORKSPACE
 
 # bundle install.
 #ここでNewしてるからファイルのコピー必要
-COPY --chown=rails:rails * ${WORKSPACE}/
+COPY --chown=rails:rails Rails/ ${WORKSPACE}/
 RUN bundle install && \
     bundle update
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
