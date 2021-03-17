@@ -37,5 +37,7 @@ RUN bundle install && \
 
 RUN yarn install
 
+RUN rails db:migrate 
+
 EXPOSE  3000
 CMD ["rails", "s", "-b", "0.0.0.0"]
