@@ -12,11 +12,11 @@ jobs:
     - name: build Dockerfile and push image # userで外部ファイル or 定義済みの処理を実行できる。ここではリポジトリのcheckout
       run: |
       
-        IMAGE_NAME=`echo test_container:${GITHUB_REF#refs/heads/} | tr "[:upper:]" "[:lower:]"`
-        REPOSITORY=`echo ${GITHUB_REPOSITORY} | tr "[:upper:]" "[:lower:]"`
+        IMAGE_NAME=`echo test_container:${GITHUB_REF#refs/heads/} | tr "[:upper:]" "[:lower:]" > /dev/null`
+        REPOSITORY=`echo ${GITHUB_REPOSITORY} | tr "[:upper:]" "[:lower:]" > /dev/null`
         docker build ./ --tag docker.pkg.github.com/${REPOSITORY}/${IMAGE_NAME}
         docker login docker.pkg.github.com --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
-        docker push docker.pkg.github.com/KPC-U16/RubyChaserver/${IMAGE_NAME}
+        docker push docker.pkg.github.com/${REPOSITORY}/${IMAGE_NAME}
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # リポジトリのsecretsとして定義した値を環境変数に渡す
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
