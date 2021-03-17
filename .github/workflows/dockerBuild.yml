@@ -13,15 +13,19 @@ jobs:
     - name: ls
       run: ls -al 
 
-    #- name: Create DIR
-    #  run: mkdir Rails
+    - name: Create DIR
+      run: mkdir Rails
     
-    #- name: mv file
-    #  run: mv * Rails/
+    - name: mv file
+      run: mv * Rails/
+
+    - name: mv .simplecov
+      run: mv .simplecov Rails
     
-    #- name: CP file
-    #  run: |
-    #    cp dockerfile
+    - name: CP file
+      run: |
+        cp Rails/dockerfile ./
+        cp Rails/Gemfile ./
     
     - name: build Dockerfile and push image # userで外部ファイル or 定義済みの処理を実行できる。ここではリポジトリのcheckout
       run: |
