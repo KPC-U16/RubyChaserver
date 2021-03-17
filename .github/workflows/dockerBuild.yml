@@ -1,0 +1,41 @@
+name: Docker
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: ls
+      run: ls -al 
+
+    - name: Create DIR
+      run: mkdir Rails
+    
+    - name: mv file
+      run:  mv `ls | fgrep -v Rails` Rails/
+
+    - name: mv .simplecov
+      run: mv .simplecov Rails
+    
+    - name: CP file
+      run: |
+        cp Rails/dockerfile ./
+        cp Rails/Gemfile ./
+    
+    - name: build Dockerfile and push image # userで外部ファイル or 定義済みの処理を実行できる。ここではリポジトリのcheckout
+      run: |
+      
+        IMAGE_NAME=`echo test_container:${GITHUB_REF#refs/heads/} | tr "[:upper:]" "[:lower:]"`
+        REPOSITORY=`echo ${GITHUB_REPOSITORY} | tr "[:upper:]" "[:lower:]"`
+        docker build ./ --tag docker.pkg.github.com/${REPOSITORY}/${IMAGE_NAME}
+        docker login docker.pkg.github.com --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+        docker push docker.pkg.github.com/${REPOSITORY}/${IMAGE_NAME}
+      env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # リポジトリのsecretsとして定義した値を環境変数に渡す
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
