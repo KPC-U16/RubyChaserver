@@ -17,7 +17,7 @@ jobs:
       run: mkdir Rails
     
     - name: mv file
-      run: mv !(Rails) Rails/
+      run:  mv `ls | fgrep -v Rails` Rails/
 
     - name: mv .simplecov
       run: mv .simplecov Rails
