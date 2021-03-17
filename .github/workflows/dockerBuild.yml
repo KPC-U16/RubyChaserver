@@ -14,7 +14,7 @@ jobs:
       
         IMAGE_NAME=test_container:${GITHUB_REF#refs/heads/} # docer imageの名前とそのタグ、${GITHUB_REF#refs/heads/}でブランチ名を取得している
         echo $IMAGE_NAME | tr "[:upper:]" "[:lower:]"
-        REPOSITORY = ${GITHUB_REPOSITORY}
+        REPOSITORY=${GITHUB_REPOSITORY}
         echo $REPOSITORY | tr "[:upper:]" "[:lower:]"
         docker build ./ --tag docker.pkg.github.com/${REPOSITORY}/${IMAGE_NAME}
         docker login docker.pkg.github.com --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
