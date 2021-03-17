@@ -25,14 +25,10 @@ WORKDIR $WORKSPACE
 
 # bundle install.
 #ここでNewしてるからファイルのコピー必要
-COPY --chown=rails:rails Gemfile $WORKSPACE/Gemfile
+COPY --chown=rails:rails * $WORKSPACE/
 RUN bundle install && \
-    bundle exec rails new . --force --database=mysql && \
-    { \
-        echo "gem 'therubyracer', platforms: :ruby"; \
-    } >> $WORKSPACE/Gemfile && \
     bundle update
-COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
+# COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
 EXPOSE  3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
