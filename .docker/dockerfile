@@ -24,6 +24,7 @@ USER rails
 WORKDIR $WORKSPACE
 
 # bundle install.
+#ここでNewしてるからファイルのコピー必要
 COPY --chown=rails:rails Gemfile $WORKSPACE/Gemfile
 RUN bundle install && \
     bundle exec rails new . --force --database=mysql && \
