@@ -18,5 +18,5 @@ jobs:
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # リポジトリのsecretsとして定義した値を環境変数に渡す
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          TEST: ${GITHUB_REPOSITORY}/${IMAGE_NAME}
+          TEST: ${GITHUB_REPOSITORY}
 
