@@ -30,4 +30,4 @@ RUN bundle install && \
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
 EXPOSE  3000
-CMD ["rails", "server", "-b", "127.0.0.1"]
+CMD ["rails", "s", "-b", "127.0.0.1"]
