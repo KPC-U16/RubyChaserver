@@ -30,5 +30,6 @@ RUN bundle install && \
     bundle update
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
+RUN ls -al
 EXPOSE  3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
