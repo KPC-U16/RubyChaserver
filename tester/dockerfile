@@ -41,8 +41,7 @@ RUN bundle install && \
 
 RUN yarn install
 
-COPY startup.sh /startup.sh
-RUN chmod 755 startup.sh
+COPY --chown=rails:rails startup.sh /startup.sh
 
 EXPOSE  3000
 CMD ["/startup.sh"]
