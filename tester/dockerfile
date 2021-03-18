@@ -40,6 +40,7 @@ RUN bundle install && \
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
 RUN yarn install && \
+    cd Rails && \
     bundle exec rails webpacker:install
 
 COPY --chown=rails:rails startup.sh /startup.sh
