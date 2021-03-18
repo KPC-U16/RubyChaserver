@@ -41,7 +41,7 @@ RUN bundle install && \
 
 RUN yarn upgrade webpack@^4.0.0 && \
     yarn install && \
-    bundle exec rails webpacker:install
+    rails webpacker:install
 
 COPY --chown=rails:rails startup.sh /startup.sh
 
