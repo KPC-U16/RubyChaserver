@@ -40,7 +40,8 @@ RUN bundle install && \
 # COPY --chown=rails:rails database.yml $WORKSPACE/config/database.yml
 
 RUN yarn upgrade webpack@^4.0.0 && \
-    yarn install
+    yarn install && \
+    bundle exec rails webpacker:install
 
 COPY --chown=rails:rails startup.sh /startup.sh
 
