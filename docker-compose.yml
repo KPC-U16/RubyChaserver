@@ -1,6 +1,0 @@
-railstest:
-  build: ./tester
-  ports:
-    - "3000:3000"
-  volumes:
-    - ./:/usr/local/src/Rails
