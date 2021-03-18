@@ -7,7 +7,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt update && apt install yarn
+RUN apt-get update && apt-get install yarn
 
 # install bundler.
 RUN apt-get update && \
@@ -26,9 +26,9 @@ RUN mkdir -p $WORKSPACE $BUNDLE_APP_CONFIG && \
     chown -R rails:rails $WORKSPACE && \
     chown -R rails:rails $BUNDLE_APP_CONFIG
 
-COPY --chown=rails:rails ../Gemfile* ${WORKSPACE}/
-COPY --chown=rails:rails ../package.json ${WORKSPACE}/
-COPY --chown=rails:rails ../yarn.lock ${WORKSPACE}/
+COPY --chown=rails:rails Gemfile* ${WORKSPACE}/
+COPY --chown=rails:rails package.json ${WORKSPACE}/
+COPY --chown=rails:rails yarn.lock ${WORKSPACE}/
 
 USER rails
 WORKDIR $WORKSPACE
